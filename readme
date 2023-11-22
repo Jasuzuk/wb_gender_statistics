@@ -1,0 +1,7 @@
+This is an exploratory study.
+The data used here is from the World Bank gender statistics website, available at https://databank.worldbank.org/source/gender-statistics#
+I downloaded data from 1983 to 2022 from all countries on the following criteria:
+  A woman can apply for a passport in the same way as a man (1=yes; 0=no)
+  A woman can obtain a judgment of divorce in the same way as a man (1=yes; 0=no)
+  A woman can open a bank account in the same way as a man (1=yes; 0=no)
+  Age at first marriage, female
