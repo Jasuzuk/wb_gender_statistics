@@ -1,0 +1,55 @@
+--The csv file was uploaded as a table named 'base' in a new schema called 'wb_gender' using the Table Data Import Wizard.
+--All table columns were set as 'text' type.
+
+USE wb_gender;
+
+ALTER TABLE base
+	CHANGE COLUMN `Series Name` series_name VARCHAR(255),
+    CHANGE COLUMN `Series Code` series_code VARCHAR(50),
+    CHANGE COLUMN `Country Name` country_name VARCHAR(255),
+    CHANGE COLUMN `Country Code` country_code VARCHAR(50),
+    CHANGE COLUMN `2022 [YR2022]` yr2022 VARCHAR(5);
+ 
+CREATE TABLE country_code AS
+	SELECT DISTINCT
+		country_name,
+        country_code
+	FROM base;
+    
+CREATE TABLE series_code AS
+	SELECT DISTINCT
+		series_name,
+        series_code
+	FROM base;
+
+
+--CREATING VIEWS:
+
+  DROP VIEW IF EXISTS women_apl_pspt_eq;
+CREATE VIEW women_apl_pspt_eq AS
+	SELECT
+		country_code,
+        yr2022
+	FROM base
+    WHERE series_code LIKE 'SG.APL.PSPT.EQ';
+    
+DROP VIEW IF EXISTS women_obt_dvrc_eq;
+CREATE VIEW women_obt_dvrc_eq AS
+	SELECT
+		country_code,
+        yr2022
+	FROM base
+    WHERE series_code LIKE 'SG.OBT.DVRC.EQ';
+
+DROP VIEW IF EXISTS women_opn_bank_eq;
+CREATE VIEW women_opn_bank_eq AS
+	SELECT
+		country_code,
+        yr2022
+	FROM base
+    WHERE series_code LIKE 'SG.OPN.BANK.EQ';
+
+--PROBLEM: HOW CAN I IDENTIFY THE LAST YEAR COLUMN WITH VALID DATA ON SERIES 'Age at first marriage, female'??
+SELECT *
+FROM base
+WHERE series_code LIKE 'SP.DYN.SMAM.FE'
